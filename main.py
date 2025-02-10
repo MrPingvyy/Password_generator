@@ -2,24 +2,29 @@ import string
 import random
 import tkinter as tk
 
-password_length = 10
+def password_generation(symbols, using_upper_case, using_numbers, using_special_characters):
+    try:
+        password_length = int(password_length_get.get())
+        if using_upper_case.get():
+            symbols += uppercase_alphabet
 
-def password_generation(symbols, password_length, using_upper_case, using_numbers, using_special_characters):
-    if using_upper_case:
-        symbols += uppercase_alphabet
+        if using_numbers.get():
+            symbols += digits
 
-    if using_numbers:
-        symbols += digits
+        if using_special_characters.get():
+            symbols += special_characters
 
-    if using_special_characters:
-        symbols += special_characters
+        password = ''
 
-    password = ''
+        for symbol in range(password_length):
+            password += random.choice(symbols)
 
-    for symbol in range(password_length):
-        password += random.choice(symbols)
+        password_window.delete('1.0', tk.END)
+        password_window.insert(tk.END, password)
 
-    print(password)
+
+    except ValueError:
+        pass
 
 symbols = string.ascii_lowercase
 uppercase_alphabet = string.ascii_uppercase
@@ -42,8 +47,14 @@ using_special_characters = tk.IntVar()
 using_special_characters_сheckbutton = tk.Checkbutton(root, text="Использовать специальные символы", variable=using_special_characters)
 using_special_characters_сheckbutton.pack()
 
-generation = password_generation(symbols, password_length, using_upper_case, using_numbers, using_special_characters)
-generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command = generation)
+password_length_get = tk.Entry(root)
+password_length_get.pack()
+
+generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command = lambda: password_generation(symbols, using_upper_case, using_numbers, using_special_characters))
 generation_password_button.pack()
+
+password_window = tk.Text(root, height=1, width=30)
+password_window.insert(tk.END, "")
+password_window.pack(pady=10)
 
 root.mainloop()
