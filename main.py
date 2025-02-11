@@ -2,17 +2,18 @@ import string
 import random
 import tkinter as tk
 
-def password_generation(symbols, using_upper_case, using_numbers, using_special_characters):
+def password_generation():
+    symbols = string.ascii_lowercase
     try:
         password_length = int(password_length_get.get())
         if using_upper_case.get():
-            symbols += uppercase_alphabet
+            symbols += string.ascii_uppercase
 
         if using_numbers.get():
-            symbols += digits
+            symbols += string.digits
 
         if using_special_characters.get():
-            symbols += special_characters
+            symbols += string.punctuation
 
         password = ''
 
@@ -22,20 +23,14 @@ def password_generation(symbols, using_upper_case, using_numbers, using_special_
         password_window.delete('1.0', tk.END)
         password_window.insert(tk.END, password)
 
-
     except ValueError:
         pass
-
-symbols = string.ascii_lowercase
-uppercase_alphabet = string.ascii_uppercase
-digits = string.digits
-special_characters = string.punctuation
 
 root = tk.Tk()
 root.title("Генератор паролей")
 root.geometry("300x400")
 
-generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command = lambda: password_generation(symbols, using_upper_case, using_numbers, using_special_characters))
+generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command =password_generation)
 generation_password_button.pack(pady = 10)
 
 frame = tk.Frame(root)
