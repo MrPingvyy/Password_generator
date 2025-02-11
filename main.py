@@ -35,26 +35,32 @@ root = tk.Tk()
 root.title("Генератор паролей")
 root.geometry("300x400")
 
+generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command = lambda: password_generation(symbols, using_upper_case, using_numbers, using_special_characters))
+generation_password_button.pack(pady = 10)
+
+frame = tk.Frame(root)
+frame.pack(anchor="w")
+
+message = tk.Message(frame, text="Введите длинну пароля", width=300)
+message.pack(side=tk.LEFT, padx = 5, pady = 10)
+
+password_length_get = tk.Entry(frame)
+password_length_get.pack(side=tk.LEFT)
+
 using_upper_case = tk.IntVar()
 using_upper_case_сheckbutton = tk.Checkbutton(root, text="Использовать верхний регистр", variable=using_upper_case)
-using_upper_case_сheckbutton.pack()
+using_upper_case_сheckbutton.pack(anchor="w", padx = 5, pady = 10)
 
 using_numbers = tk.IntVar()
 using_numbers_сheckbutton = tk.Checkbutton(root, text="Использовать цифры", variable=using_numbers)
-using_numbers_сheckbutton.pack()
+using_numbers_сheckbutton.pack(anchor="w", padx = 5, pady = 10)
 
 using_special_characters = tk.IntVar()
 using_special_characters_сheckbutton = tk.Checkbutton(root, text="Использовать специальные символы", variable=using_special_characters)
-using_special_characters_сheckbutton.pack()
-
-password_length_get = tk.Entry(root)
-password_length_get.pack()
-
-generation_password_button = tk.Button(root, text = 'Сгенерировать пароль', command = lambda: password_generation(symbols, using_upper_case, using_numbers, using_special_characters))
-generation_password_button.pack()
+using_special_characters_сheckbutton.pack(anchor="w", padx = 5, pady = 10)
 
 password_window = tk.Text(root, height=1, width=30)
 password_window.insert(tk.END, "")
-password_window.pack(pady=10)
+password_window.pack(pady=50)
 
 root.mainloop()
